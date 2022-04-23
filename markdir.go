@@ -10,7 +10,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/russross/blackfriday"
+	"github.com/russross/blackfriday/v2"
 )
 
 var bind = flag.String("bind", "127.0.0.1:19000", "port to run the server on")
@@ -63,7 +63,7 @@ func (r renderer) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	output := blackfriday.MarkdownCommon(input)
+	output := blackfriday.Run(input)
 
 	rw.Header().Set("Content-Type", "text/html; charset=utf-8")
 
